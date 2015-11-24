@@ -1,7 +1,7 @@
 %% preprocessing cfg
 % define trials
 cfg = [];
-cfg.dataset = MEG_dataset{MEG_num}; 
+cfg.dataset = MEG_file{MEG_num}; 
 cfg.trialdef.eventtype = 'frontpanel trigger';
 cfg.trialdef.eventvalue = trigger_value(MEG_num);
 cfg.trialdef.prestim    = 1;
