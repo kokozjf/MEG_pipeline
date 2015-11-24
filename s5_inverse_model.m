@@ -45,17 +45,17 @@ for i = 0:0.1:0.4 % automatical beamforming
     cfg.vol=vol;
     sourcepst=ft_sourceanalysis(cfg, avgpst);
     
-    AEP_source = sourcepst;
-    AEP_source.avg.pow= (sourcepst.avg.pow - sourcepre.avg.pow)./sourcepre.avg.pow;
+    ERF_source = sourcepst;
+    ERF_source.avg.pow= (sourcepst.avg.pow - sourcepre.avg.pow)./sourcepre.avg.pow;
 
 
     % plot source
     cfg              = [];
     cfg.parameter    = 'avg.pow';
     cfg.interpmethod = 'nearest';
-    source_int  = ft_sourceinterpolate(cfg, AEP_source, mri);
+    source_int  = ft_sourceinterpolate(cfg, ERF_source, mri);
 %     source_int.mask = source_int.pow > max(source_int.pow(:)*0.5);
-    source_int.mask = source_int.pow > 0.4;
+    source_int.mask = source_int.pow > 0.2;
     
     cfg = [];
     norm_source_int = ft_volumenormalise(cfg, source_int);
@@ -72,11 +72,11 @@ for i = 0:0.1:0.4 % automatical beamforming
     ft_sourceplot(cfg,norm_source_int);
     
     view ([90 0]);
-    left_name = strcat('figure/norm_left_',num2str(i + 0.1),'.png');
+    left_name = strcat('figure/norm_right_',num2str(i),'_',num2str(i + 0.1),'.png');
     saveas(gcf,left_name,'png');
     
     view ([-90 0]);
-    right_name = strcat('figure/norm_right_',num2str(i + 0.1),'.png');
+    right_name = strcat('figure/norm_left_',num2str(i),'_',num2str(i + 0.1),'.png');
     saveas(gcf,right_name,'png');
     close all;
     

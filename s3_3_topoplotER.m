@@ -2,6 +2,7 @@
 plot_cfg = [];
 plot_cfg.layout = 'CTF275.lay';
 plot_cfg.xlim = [-0.1:0.05:0.5];
+plot_cfg.zlim = [-5*1e-14 5*1e-14];
 plot_cfg.colorbar = 'yes';
 plot_cfg.marker = 'off';
 plot_cfg.comment = 'xlim';
