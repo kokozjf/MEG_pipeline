@@ -11,4 +11,4 @@ cfg.covariancewindow = 'all';
 
 ERF = ft_timelockanalysis(cfg, redefine_data);
 
-save('results.mat','-append');
+save('results.mat','ERF','-append');

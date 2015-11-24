@@ -29,6 +29,10 @@ cfg.grid.filter=source_avg.avg.filter;
 cfg.vol=vol;
 sourcepre=ft_sourceanalysis(cfg, avgpre);
 
+%mri normalise
+cfg = [];
+ [norm_mri] = ft_volumenormalise(cfg, mri);
+
 
 for i = 0:0.1:0.4 % automatical beamforming
     ERF_part_cfg.toilim = [i i+0.1];
@@ -54,39 +58,52 @@ for i = 0:0.1:0.4 % automatical beamforming
     cfg.parameter    = 'avg.pow';
     cfg.interpmethod = 'nearest';
     source_int  = ft_sourceinterpolate(cfg, AEP_source, mri);
-%     source_int.anatomy = mri.anatomy;
-%     source_int.mask = source_int.pow > max(source_int.pow(:)*0.5);
+    source_int.anatomy = mri.anatomy;
+    source_int.mask = source_int.pow > max(source_int.pow(:)*0.5);
+
     
-    cfg = [];
-    norm_source_int = ft_volumenormalise(cfg, source_int);
+    % test
+    cfg              = [];
+    cfg.parameter    = 'avg.pow';
+    cfg.interpmethod = 'nearest';
+    source_int1  = ft_sourceinterpolate(cfg, AEP_source, mri);
+    source_int1.anatomy = norm_mri.anatomy;
+    source_int1.mask = source_int1.pow > max(source_int1.pow(:)*0.5);
     
+%     %source plot
+%     cfg               = [];
+%     cfg.method        = 'surface';
+%     cfg.funparameter  = 'pow';
+%     cfg.funcolormap = 'jet';
+%     cfg.surfdownsample = 10;
+%     ft_sourceplot(cfg,norm_pow);
     
-    %draw figure
+    %test
     cfg               = [];
     cfg.method        = 'surface';
     cfg.funparameter  = 'pow';
     cfg.funcolormap = 'jet';
     cfg.surfdownsample = 10;
-    ft_sourceplot(cfg,norm_source_int);
+    ft_sourceplot(cfg,norm_pow);
     
     view ([90 0]);
-    left_name = strcat('figure/norm_left_',num2str(i),'.png');
+    left_name = strcat('figure/left_',num2str(i),'.png');
     saveas(gcf,left_name,'png');
     
     view ([-90 0]);
-    right_name = strcat('figure/norm_right_',num2str(i),'.png');
+    right_name = strcat('figure/right_',num2str(i),'.png');
     saveas(gcf,right_name,'png');
     close all;
     
-%     cfg               = [];
-%     cfg.method        = 'slice';
-%     cfg.funparameter  = 'pow';
-%     cfg.funcolormap = 'jet';
-%     cfg.surfdownsample = 10;
-%     ft_sourceplot(cfg,norm_source_int);
-%     
-%     right_name = strcat('figure/slice_',num2str(i),'.png');
-%     saveas(gcf,right_name,'png');
-%     close all;
+    cfg               = [];
+    cfg.method        = 'slice';
+    cfg.funparameter  = 'pow';
+    cfg.funcolormap = 'jet';
+    cfg.surfdownsample = 10;
+    ft_sourceplot(cfg,source_int);
+    
+    right_name = strcat('figure/slice_',num2str(i),'.png');
+    saveas(gcf,right_name,'png');
+    close all;
 
 end
