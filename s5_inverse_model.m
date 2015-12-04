@@ -13,14 +13,14 @@ cfg.lcmv.fixedori    = 'yes'; % project on axis of most variance using SVD
 source_avg           = ft_sourceanalysis(cfg, ERF);
 
 %% pst and post 
-ERF_part_cfg = []; 
-ERF_part_cfg.toilim = [-0.1 0];
-datapre = ft_redefinetrial(ERF_part_cfg, filting_data); 
+cfg = []; 
+cfg.toilim = [-0.1 0];
+datapre = ft_redefinetrial(cfg, filting_data); 
 
-ERF_part_cfg = [];
-ERF_part_cfg.covariance= 'yes';
-ERF_part_cfg.channel   = 'MEG';
-avgpre = ft_timelockanalysis(ERF_part_cfg,datapre);
+cfg = [];
+cfg.covariance= 'yes';
+cfg.channel   = 'MEG';
+avgpre = ft_timelockanalysis(cfg,datapre);
 
 cfg=[];
 cfg.method='lcmv';
@@ -30,13 +30,13 @@ cfg.vol=vol;
 sourcepre=ft_sourceanalysis(cfg, avgpre);
 
 
-for i = 0:0.1:0.4 % automatical beamforming
-    ERF_part_cfg.toilim = [i i+0.1];
-    datapost = ft_redefinetrial(ERF_part_cfg, filting_data);
-    ERF_part_cfg = [];
-    ERF_part_cfg.covariance='yes';
-    ERF_part_cfg.channel   = 'MEG';
-    avgpst = ft_timelockanalysis(ERF_part_cfg,datapost);
+for i = 0:0.1:1.4-0.1 % automatical beamforming
+    cfg.toilim = [i i+0.1];
+    datapost = ft_redefinetrial(cfg, filting_data);
+    cfg = [];
+    cfg.covariance='yes';
+    cfg.channel   = 'MEG';
+    avgpst = ft_timelockanalysis(cfg,datapost);
     
     cfg=[];
     cfg.method='lcmv';

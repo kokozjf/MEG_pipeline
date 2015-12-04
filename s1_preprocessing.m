@@ -1,4 +1,5 @@
 %% preprocessing cfg
+
 % define trials
 cfg = [];
 cfg.dataset = MEG_dataset{MEG_num}; 
@@ -19,12 +20,12 @@ filting_data = ft_preprocessing(cfg,raw_data);
 raw_ERF = ft_timelockanalysis(cfg, filting_data);
 
 % check edge artifacts
-plot_cfg = [];
-plot_cfg.viewmode = 'butterfly';
-plot_cfg.colorgroups = 'allblack';
-ft_databrowser(plot_cfg, raw_ERF);
+cfg = [];
+cfg.viewmode = 'butterfly';
+cfg.colorgroups = 'allblack';
+ft_databrowser(cfg, raw_ERF);
 saveas(gcf,'figure/edge_artifacts_check.png');
 close all;
 
 
-save('results.mat');
+% save('results.mat');

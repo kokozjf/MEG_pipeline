@@ -1,12 +1,13 @@
 %% topoplotER
-plot_cfg = [];
-plot_cfg.layout = 'CTF275.lay';
-plot_cfg.xlim = [-0.1:0.05:0.5];
-plot_cfg.zlim = [-5*1e-14 5*1e-14];
-plot_cfg.colorbar = 'yes';
-plot_cfg.marker = 'off';
-plot_cfg.comment = 'xlim';
-plot_cfg.commentpos = 'lefttop';
-ft_topoplotER(plot_cfg,ERF);
-saveas(gcf,'figure/topoplotER.png');
+cfg = [];
+cfg.layout = 'CTF275.lay';
+% cfg.xlim = [-0.1:0.1:1.4]; %aef
+cfg.xlim = [-0.1:0.1:0.8]; %vef
+cfg.zlim = [-5*1e-14 5*1e-14];
+cfg.colorbar = 'yes';
+cfg.marker = 'off';
+cfg.comment = 'xlim';
+cfg.commentpos = 'lefttop';
+ft_topoplotER(cfg,ERF);
+saveas(gcf,'figure/topoplotER_step01_noscaleing.png');
 close all;
