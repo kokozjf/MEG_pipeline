@@ -2,9 +2,9 @@
 
 % define trials
 cfg = [];
-cfg.dataset = MEG_dataset{MEG_num}; 
+cfg.dataset = MEG_dataset; 
 cfg.trialdef.eventtype = 'frontpanel trigger';
-cfg.trialdef.eventvalue = trigger_value(MEG_num);
+cfg.trialdef.eventvalue = trigger_value;
 cfg.trialdef.prestim    = 1;
 cfg.trialdef.poststim   = 2; 
 cfg.channel = 'meg';

@@ -21,6 +21,7 @@ cfg.showoutline = 'yes';
 cfg.layout = 'CTF275.lay';
 cfg.marker = 'off';
 cfg.vlim = 'maxabs';
+cfg.colormap = 'jet';
 ft_multiplotER(cfg,ERF_planar);
 saveas(gcf,'figure/multiplotER_planar.png');
 close all;
@@ -38,11 +39,17 @@ cfg = [];
 cfg.layout = 'CTF275.lay';
 % cfg.xlim = [-0.1:0.1:1.4]; %aef
 cfg.xlim = [-0.1:0.1:0.8]; %vef
-% cfg.zlim = [-5*1e-14 5*1e-14];
+cfg.zlim = [-2*1e-14 4*1e-14];
 cfg.colorbar = 'yes';
+cfg.colormap = 'jet';
 cfg.marker = 'off';
 cfg.comment = 'xlim';
 cfg.commentpos = 'lefttop';
 ft_topoplotER(cfg,ERF_planar);
 saveas(gcf,'figure/topoplotER_planar.png');
 close all;
+
+%% ft_movieplot
+cfg = [];
+cfg.colorbar = 'yes';
+ft_movieplotER(cfg, ERF_planar);

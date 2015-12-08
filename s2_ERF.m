@@ -1,7 +1,7 @@
 %% redefine trials within the time range of interest
 cfg = [];
-cfg.toilim = [-0.1 1.4]; %aef
-% cfg.toilim = [-0.1 0.8]; %vef
+% cfg.toilim = [-0.1 1.4]; %aef
+cfg.toilim = [-0.1 0.8]; %vef
 redefine_data = ft_redefinetrial(cfg, filting_data);
 
 %% ERF for further ananyzing
